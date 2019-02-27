@@ -1,28 +1,30 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch
+} from 'react-router-dom';
 import { connect } from 'react-redux';
+import Listings from '../components/Listings';
+import Listing from '../components/Listing';
 
-class Home extends Component {
-	componentDidMount() {
-		this.getListings();
-	}
-
-	getListings = () => {
-		fetch(`http://localhost:3000/api/v1/listings/?city=${""}&state=${""}&term=${""}`, {
-			method: "GET",
-			headers: {
-				"Authorization": `Basic ${localStorage.getItem('token')}`,
-				"Content-Type": "application/json"
-			}
-		}).then(r=>r.json()).then(console.log);
-	}
-
-	render() {
-		return (
+const Home = () => {
+	return (
+		<Router>
 			<Fragment>
+				<Link to="/profile">Profile</Link>
+				<Link to="/listing">Listing</Link>
+				<Link to="/">Home</Link>
 				<h1>Home</h1>
+				<Switch>
+					<Route path="/profile" component={Listings}/>
+					<Route path="/listing" component={Listing}/>
+					<Route path="/" component={Listings}/>
+				</Switch>
 			</Fragment>
-		);
-	}
+		</Router>
+	);
 }
 
 export default connect()(Home);

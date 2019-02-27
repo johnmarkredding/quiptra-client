@@ -1,0 +1,24 @@
+body {
+	padding: 1rem;
+	min-height: 100vh;
+	min-width: 100vw;
+}
+
+
+h1 {
+	font-size: 2rem;
+}
+h2 {
+	font-size: 1.5rem;
+}
+#listings ul {
+	list-style-type: none;
+}
+
+.listing-card {
+	display: block;
+	width: 400px;
+}
+.listing-card > img {
+	width: 300px;
+}
