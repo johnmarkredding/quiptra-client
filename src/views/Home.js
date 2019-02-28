@@ -1,30 +1,33 @@
-import React, { Fragment } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch
-} from 'react-router-dom';
+import React, { Fragment, useEffect } from 'react';
+import { Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Listings from '../components/Listings';
-import Listing from '../components/Listing';
 
-const Home = () => {
-	return (
-		<Router>
-			<Fragment>
-				<Link to="/profile">Profile</Link>
-				<Link to="/listing">Listing</Link>
-				<Link to="/">Home</Link>
-				<h1>Home</h1>
-				<Switch>
-					<Route path="/profile" component={Listings}/>
-					<Route path="/listing" component={Listing}/>
-					<Route path="/" component={Listings}/>
-				</Switch>
-			</Fragment>
-		</Router>
-	);
+const Home = props => {
+	useEffect(()=> {
+		props.setCurrentNav("home")
+	}, [props.currentNav]);
+
+	const ensureLoggedIn = () => {
+		if(!localStorage.getItem("token")) {
+			return <Redirect to="/welcome" />;
+		} else {
+			return (
+				<Fragment>
+					<h1>Home</h1>
+					<Listings/>
+				</Fragment>
+			);
+		}
+	}
+	return (ensureLoggedIn());
 }
 
-export default connect()(Home);
+const mapStateToProps = (state) => ({
+	currentNav: state.currentNav
+});
+const mapDispatchToProps = (dispatch) => ({
+	setCurrentNav: (navString) => dispatch({type: "SET_CURRENT_NAV", payload: navString})
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));

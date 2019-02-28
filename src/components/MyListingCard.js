@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-const ListingCard = props => {
+const MyListingCard = props => {
 	const { listing, setCurrentListing } = props;
 
 	const clickHandler = () => {
 		setCurrentListing(listing)
-		props.history.push("/listing");
+		props.history.push("/my-listing");
 	}
 	
 	return (
@@ -21,7 +21,7 @@ const ListingCard = props => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-	setCurrentListing: (listing) => dispatch({type: "SET_CURRENT_LISTING", payload: listing})
+	setCurrentListing: (listing) => dispatch({type: "SET_CURRENT_MY_LISTING", payload: listing})
 });
 
-export default withRouter(connect(null, mapDispatchToProps)(ListingCard));
+export default withRouter(connect(null, mapDispatchToProps)(MyListingCard));

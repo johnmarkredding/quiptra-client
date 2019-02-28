@@ -1,8 +1,15 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import LoginForm from '../components/LoginForm';
+import { withRouter } from 'react-router-dom';
+
 
 const Login = props => {
+	useEffect(()=> {
+		props.setCurrentNav("login")
+	}, [props.currentNav]);
+
+
 	const handleSubmit = loginObject => {
 		fetch("http://localhost:3000/api/v1/login", {
 			method: "Post",
@@ -12,12 +19,17 @@ const Login = props => {
 			body: JSON.stringify(loginObject)
 		})
 			.then(res => res.json())
-			.then(placeTokenAndStoreUser)
+			.then(placeTokenAndStoreUser);
 	}
 
 	const placeTokenAndStoreUser = (data) => {
-		localStorage.setItem("token", data.token);
-		props.setCurrentUser(data.user);
+		if(!!data.message) {
+			alert(data.message);
+		} else {
+			localStorage.setItem("token", data.token);
+			props.setCurrentUser(data.user);
+			props.history.push("/");
+		}
 	}
 
 	return (
@@ -28,9 +40,14 @@ const Login = props => {
 	);
 }
 
-
-const mapDispatchToProps = (dispatch) => ({
-	setCurrentUser: (user) => (dispatch({type: "SET_CURRENT_USER", payload: user}))
+const mapStateToProps = (state) => ({
+	listing: state.currentListing,
+	currentNav: state.currentNav
 });
 
-export default connect(null, mapDispatchToProps)(Login);
+const mapDispatchToProps = (dispatch) => ({
+	setCurrentUser: (user) => (dispatch({type: "SET_CURRENT_USER", payload: user})),
+	setCurrentNav: (navString) => dispatch({type: "SET_CURRENT_NAV", payload: navString})
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

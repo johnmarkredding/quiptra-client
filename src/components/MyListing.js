@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 const Listing = props => {
 	const { listing } = props;
 	useEffect(()=> {
-		props.setCurrentNav("listing")
+		props.setCurrentNav("myListing")
 	}, [props.currentNav]);
 
 	return (
@@ -18,7 +18,7 @@ const Listing = props => {
 }
 
 const mapStateToProps = (state) => ({
-	listing: state.currentListing,
+	listing: state.currentMyListing,
 	currentNav: state.currentNav
 });
 const mapDispatchToProps = (dispatch) => ({

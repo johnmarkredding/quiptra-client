@@ -1,26 +1,23 @@
-import React, { Fragment, Component } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import ListingCard from './ListingCard';
 import Search from './Search';
 
-class Listings extends Component {
-	listingItems() {
-		return this.props.listings.map(l => <ListingCard key={l.id} listing={l} />)
+const Listings = props => {
+	const listingItems = () => {
+		return props.listings.map(l => <ListingCard key={l.id} listing={l} />)
 	}
-
-	render() {
-		return (
-			<Fragment>
-				<Search/>
-				<section id="listings">
-					<h2>Listings</h2>
-					<ul>
-						{this.listingItems()}
-					</ul>
-				</section>
-			</Fragment>
-		);
-	}
+	return (
+		<Fragment>
+			<Search/>
+			<section id="listings">
+				<h2>Listings</h2>
+				<ul>
+					{listingItems()}
+				</ul>
+			</section>
+		</Fragment>
+	);
 }
 
 

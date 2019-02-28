@@ -22,3 +22,11 @@ h2 {
 .listing-card > img {
 	width: 300px;
 }
+
+.listing-detail {
+	display: block;
+	width: 400px;
+}
+.listing-detail img {
+	width: 300px;
+}
