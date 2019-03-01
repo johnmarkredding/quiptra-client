@@ -2,18 +2,16 @@ import React, { Fragment, Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import RequestCard from './RequestCard';
-import { getMyListings } from '../store/thunks/listingsThunk';
+import { getRentalRequests } from '../store/thunks/listingsThunk';
 
 class RentalRequests extends Component {
 	componentDidMount() {
 		this.props.setCurrentNav("rentalRequests");
-		this.props.getListings("rentalRequests");
+		this.props.getRequests();
 	}
 
 	requests = () => {
-		const bookingsArrays = this.props.listings.map(l => l.bookings);
-		const requestArr = flatten(bookingsArrays);
-		return requestArr.map(b => <RequestCard key={b.id} request={b} />);
+		return this.props.requests.map(r => <RequestCard key={r.id} request={r} />);
 	}
 	render() {
 		return (
@@ -29,23 +27,12 @@ class RentalRequests extends Component {
 	}
 }
 const mapStateToProps = (state) => ({
-	listings: state.myListings
+	requests: state.rentalRequests
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	getListings: () => dispatch(getMyListings()),
+	getRequests: () => dispatch(getRentalRequests()),
 	setCurrentNav: (navString) => dispatch({type: "SET_CURRENT_NAV", payload: navString})
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RentalRequests));
-
-
-const flatten = (arr) => {
-	let newArr = [];
-	for (let x in arr) {
-		newArr.push(...arr[x]);
-	}
-	return newArr;
-}
-
-

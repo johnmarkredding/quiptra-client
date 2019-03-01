@@ -9,7 +9,7 @@ const Navigation = props => {
 		profile: (<Fragment><Link to="/">Home</Link></Fragment>),
 		listing: (<Fragment><Link to="/">Home</Link><Link to="/rent-listing">Rent</Link></Fragment>),
 		myListing: (<Fragment><Link to="/my-listings">Back</Link><Link to="/edit-listing">Edit</Link></Fragment>),
-		myListings: (<Fragment><Link to="/profile">Profile</Link><Link to="/new-listing">New Listing</Link></Fragment>),
+		myListings: (<Fragment><Link to="/profile">Back</Link><Link to="/new-listing">New Listing</Link></Fragment>),
 		newListing: (<Fragment><Link to="/my-listings">Back</Link></Fragment>),
 		signUp: (<Fragment><Link to="/welcome">Back</Link></Fragment>),
 		rentalRequests: (<Fragment><Link to="/profile">Back</Link></Fragment>),

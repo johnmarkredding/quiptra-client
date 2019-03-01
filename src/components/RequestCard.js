@@ -2,10 +2,13 @@ import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-const RequestCard = props => {
+const RequestCard = ({request}) => {
 	return (
 		<li>
-			props.request.id}
+			<h3>{request.dates.split("-").join("/").split("...").join(" → ")}</h3>
+			<p>{request.status}</p>
+			<button>Accept</button>
+			<button>Deny</button>
 		</li>
 	);
 }

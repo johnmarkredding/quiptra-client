@@ -17,7 +17,7 @@ class MyListings extends Component {
 		return (
 			<Fragment>
 				<section id="listings">
-					<h2>My Listings</h2>
+					<h1>My Listings</h1>
 					<ul>
 						{this.listingItems()}
 					</ul>
