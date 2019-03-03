@@ -162,6 +162,6 @@ const datePickerDefaultProps = {
 
 
 const dateString = (start, end) => {
-	const formattedString = `${start.clone().locale('en').format('YYYY-MM-DD')}...${end.add(1, "d").clone().locale('en').format('YYYY-MM-DD')}`;
+	const formattedString = `${start.format('YYYY-MM-DD')}...${end.add(1, "d").format('YYYY-MM-DD')}`;
 	return formattedString;
 };
