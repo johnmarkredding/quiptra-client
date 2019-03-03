@@ -12,7 +12,7 @@ const Profile = props => {
 	return (
 		<Fragment>
 			<h1>Profile</h1>
-			{!!props.currentUser ? (<p>{props.currentUser.name}</p>) : null}
+			{!!props.currentUser ? (<p>{props.currentUser.id} : {props.currentUser.name}</p>) : null}
 			{!!props.currentUser ? (<p>@{props.currentUser.username}</p>) : null}
 			<Link to="/my-listings">My Listings</Link>
 			<Link to="/my-bookings">My Bookings</Link>

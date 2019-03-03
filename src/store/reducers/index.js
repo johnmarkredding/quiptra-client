@@ -8,6 +8,7 @@ const initialState = {
 	searchState: "",
 	currentUser: null,
 	currentListing: {},
+	bookedDates: [],
 	currentMyListing: {},
 	currentNav: "welcome"
 }
@@ -54,7 +55,16 @@ export const rootReducer = (state = initialState, action) => {
 				return state;
 			} else {
 				return {...state, rentalRequests: action.payload}
-		}
+			}
+		case "SET_BOOKED_DATES":
+			if (action.payload.message) {
+				alert(action.payload.message);
+				return state;
+			} else {
+				return {...state, bookedDates: action.payload}
+			}
+		case "REMOVE_RENTAL_REQUEST":
+			return {...state, rentalRequests: state.rentalRequests.filter(r => r.id !== action.payload)};
 		case "SET_CURRENT_MY_LISTING":
 			return {...state, currentMyListing: action.payload}
 		case "SET_SEARCH_TERM":

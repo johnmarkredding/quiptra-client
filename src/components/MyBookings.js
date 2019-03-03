@@ -10,8 +10,7 @@ class MyBookings extends Component {
 	}
 
 	myBookings = () => {
-		// return this.props.bookings.map(b => b.renter_id);
-		console.log(this.props.bookings);
+		return this.props.bookings.map(b => <li key={b.id}>Listing {b.listing_id}. Renter {b.renter_id}</li>);
 	}
 
 	render() {
