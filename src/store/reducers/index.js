@@ -35,6 +35,13 @@ export const rootReducer = (state = initialState, action) => {
 			} else {
 				return {...state, myListings: action.payload}
 			}
+		case "ADD_TO_MY_LISTINGS":
+			if (action.payload.message) {
+				alert(action.payload.message);
+				return state;
+			} else {
+				return {...state, myListings: [...state.myListings, action.payload]};
+			}
 		case "SET_MY_BOOKINGS":
 			if (action.payload.message) {
 				alert(action.payload.message);

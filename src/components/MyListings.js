@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import ListingCard from './MyListingCard';
+import MyListingCard from './MyListingCard';
 import { getMyListings } from '../store/thunks/listingsThunk';
 
 class MyListings extends Component {
@@ -11,7 +11,7 @@ class MyListings extends Component {
 	}
 
 	listingItems = () => {
-		return this.props.listings.map(l => <ListingCard key={l.id} listing={l} />)
+		return this.props.listings.map(l => <MyListingCard key={l.id} listing={l} />)
 	}
 	render() {
 		return (

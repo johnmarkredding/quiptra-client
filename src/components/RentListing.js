@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, withRouter, Redirect } from 'react-router-dom';
 import { sendBookingRequest, getBookedDates } from "../store/thunks/listingsThunk";
 import 'react-dates/initialize';
 import { DateRangePicker } from 'react-dates';
@@ -13,14 +13,14 @@ const RentListing = props => {
 	const [endDate, setEndDate] = useState(null);
 	const [focusedInput, setFocusedInput] = useState(null);
 	const {
-		currentListing, sendBookingRequest, setCurrentNav,
+		listing, sendBookingRequest, setCurrentNav,
 		currentNav, bookedDates, getBookedDates, history,
 		clearBookedDates
 	} = props;
 
 
 	useEffect(()=> {
-		getBookedDates(currentListing.id);
+		getBookedDates(listing.id);
 		setCurrentNav("rentListing");
 		return clearBookedDates
 	}, []);
@@ -41,9 +41,9 @@ const RentListing = props => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		if (currentListing) {
+		if (listing.id) {
 			let request = {
-				listing_id: currentListing.id,
+				listing_id: listing.id,
 				dates: dateString(startDate, endDate)
 			};
 			sendBookingRequest(request);
@@ -71,12 +71,11 @@ const RentListing = props => {
 	}
 
 
-	const validateAuth = () => {
-		if (!currentListing.title) {
+	const validateCurrentListingExists = () => {
+		if (!listing.id) {
 			return (
 				<Fragment>
-					<h2>You need to select a listing!</h2>
-					<Link to="/" >Listings</Link>
+					<Redirect to="/" />
 				</Fragment>
 			);
 		} else {
@@ -95,7 +94,7 @@ const RentListing = props => {
 						withFullScreenPortal={true}
 						isOutsideRange={isOutsideRange}
 					/>
-					<h2>{currentListing.title} {currentListing.id}</h2>
+					<h2>{listing.title} {listing.id}</h2>
 					<form onSubmit={handleSubmit}>
 						<button>Submit Request</button>
 					</form>
@@ -107,7 +106,7 @@ const RentListing = props => {
 	return (
 		<section>
 			<h1>Rent Form</h1>
-			{validateAuth()}
+			{validateCurrentListingExists()}
 		</section>
 	);
 }
@@ -115,7 +114,7 @@ const RentListing = props => {
 const mapStateToProps = (state) => ({
 	currentNav: state.currentNav,
 	bookedDates: state.bookedDates,
-	currentListing: state.currentListing
+	listing: state.currentListing
 });
 const mapDispatchToProps = (dispatch) => ({
 	setCurrentNav: (navString) => dispatch({type: "SET_CURRENT_NAV", payload: navString}),

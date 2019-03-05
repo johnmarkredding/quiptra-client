@@ -12,7 +12,7 @@ const SignUp = props => {
 
 
 	const handleSubmit = loginObject => {
-		fetch("http://localhost:3000/api/v1/login", {
+		fetch("http://localhost:3000/api/v1/sign-up", {
 			method: "Post",
 			headers: {
 				"Content-Type": "application/json"

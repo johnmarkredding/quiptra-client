@@ -69,6 +69,17 @@ export const sendBookingRequest = (request) => (dispatch) => {
 	}).then(r => r.json()).then(j => dispatch({type:"ADD_TO_MY_BOOKINGS", payload: j}));
 }
 
+export const createListing = (listing) => (dispatch) => {
+	fetch(`http://localhost:3000/api/v1/listings`, {
+		method: "POST",
+		headers: {
+			"Authorization": `Bearer ${localStorage.getItem('token')}`,
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(listing)
+	}).then(r => r.json()).then(j => dispatch({type:"ADD_TO_MY_LISTINGS", payload: j}));
+}
+
 export const updateRequest = (request) => (dispatch) => {
 	fetch(`http://localhost:3000/api/v1/bookings/${request.id}`, {
 		method: "PATCH",

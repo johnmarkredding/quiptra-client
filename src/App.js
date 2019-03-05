@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
 	BrowserRouter as Router,
 	Route,
@@ -22,33 +22,31 @@ import EditListing from './components/EditListing';
 import RentListing from './components/RentListing';
 import NewListing from './components/NewListing';
 
-class App extends Component {
+const App = props => {
 
-	render() {
-		return (
-			<Router>
-				<div className="App">
-					<Nav/>
-					<Switch>
-						<Route path="/welcome" component={Welcome} />
-						<Route path="/login" component={Login} />
-						<Route path="/log-out" component={LogOut} />
-						<Route path="/sign-up" component={SignUp} />
-						<Route path="/listing" component={Listing}/>
-						<Route path="/profile" component={Profile}/>
-						<Route path="/my-bookings" component={MyBookings}/>
-						<Route path="/rental-requests" component={RentalRequests}/>
-						<Route path="/my-listings" component={MyListings}/>
-						<Route path="/my-listing" component={MyListing}/>
-						<Route path="/edit-listing" component={EditListing}/>
-						<Route path="/new-listing" component={NewListing}/>
-						<Route path="/rent-listing" component={RentListing}/>
-						<Route path="/" component={Home} />
-					</Switch>
-				</div>
-			</Router>
-		);
-	}
+	return (
+		<Router>
+			<div className="App">
+				<Nav/>
+				<Switch>
+					<Route path="/welcome" component={Welcome}/>
+					<Route path="/login" component={Login}/>
+					<Route path="/sign-up" component={SignUp}/>
+					<Route path="/log-out" component={LogOut}/>
+					<Route path="/listing" component={Listing}/>
+					<Route path="/profile" component={Profile}/>
+					<Route path="/my-bookings" component={MyBookings}/>
+					<Route path="/rental-requests" component={RentalRequests}/>
+					<Route path="/my-listings" component={MyListings}/>
+					<Route path="/my-listing" component={MyListing}/>
+					<Route path="/edit-listing" component={EditListing}/>
+					<Route path="/new-listing" component={NewListing}/>
+					<Route path="/rent-listing" component={RentListing}/>
+					<Route path="/" component={Home}/>
+				</Switch>
+			</div>
+		</Router>
+	);
 }
 
 const mapDispatchToProps = (dispatch) => ({
