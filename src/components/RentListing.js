@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter, Redirect } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { sendBookingRequest, getBookedDates } from "../store/thunks/listingsThunk";
 import 'react-dates/initialize';
 import { DateRangePicker } from 'react-dates';
@@ -13,8 +13,7 @@ const RentListing = props => {
 	const [endDate, setEndDate] = useState(null);
 	const [focusedInput, setFocusedInput] = useState(null);
 	const {
-		listing, sendBookingRequest, setCurrentNav,
-		currentNav, bookedDates, getBookedDates, history,
+		listing, sendBookingRequest, setCurrentNav, bookedDates, getBookedDates, history,
 		clearBookedDates
 	} = props;
 
@@ -81,21 +80,38 @@ const RentListing = props => {
 		} else {
 			return (
 				<Fragment>
+					<h2>{listing.title} {listing.id}</h2>
+					<form onSubmit={handleSubmit}>
 					<DateRangePicker
 						{...datePickerDefaultProps}
 						onDatesChange={updateDates}
 						onFocusChange={updateFocus}
 						showClearDates={true}
 						startDate={startDate}
-						startDateId={"Hi"}
-						endDateId={"Bye"}
+						startDateId={"startDate"}
+						endDateId={"endDate"}
 						endDate={endDate}
 						focusedInput={focusedInput}
 						withFullScreenPortal={true}
 						isOutsideRange={isOutsideRange}
+						styles={{
+  "margin": "0 auto 1rem auto",
+  "background": "none",
+  "border": "0",
+  "outline": "0",
+  "display": "block",
+  "fontSize": "1.25rem",
+  "fontWeight": "normal",
+  "borderRadius": "2.441rem",
+  "backgroundColor": "rgba(80,82,78,1)",
+  "color": "rgb(255,255,255)",
+  "padding": "0 0.8rem 0 0.8rem",
+  "height": "2.441rem",
+  "width": "100%",
+  "maxWidth": "100%",
+  "boxShadow": "inset 0 0 0 2px rgba(175,168,171,1)"
+}}
 					/>
-					<h2>{listing.title} {listing.id}</h2>
-					<form onSubmit={handleSubmit}>
 						<button>Submit Request</button>
 					</form>
 				</Fragment>
@@ -112,7 +128,6 @@ const RentListing = props => {
 }
 
 const mapStateToProps = (state) => ({
-	currentNav: state.currentNav,
 	bookedDates: state.bookedDates,
 	listing: state.currentListing
 });
@@ -156,7 +171,8 @@ const datePickerDefaultProps = {
 	renderDayContents: null,
 	minimumNights: 0,
 	isDayHighlighted: () => false,
-	noBorder: true
+	noBorder: true,
+	styles: {}
 };
 
 

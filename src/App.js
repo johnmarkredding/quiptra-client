@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 import {
 	BrowserRouter as Router,
 	Route,
@@ -23,7 +23,6 @@ import RentListing from './components/RentListing';
 import NewListing from './components/NewListing';
 
 const App = props => {
-
 	return (
 		<Router>
 			<div className="App">

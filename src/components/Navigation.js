@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Navigation = props => {
 	const currentNav = {
-		welcome: (<Fragment></Fragment>),
+		welcome: null,
 		home: (<Fragment><Link to="/log-out">Log Out</Link><Link to="/profile">Profile</Link></Fragment>),
 		profile: (<Fragment><Link to="/">Home</Link></Fragment>),
 		listing: (<Fragment><Link to="/">Home</Link><Link to="/rent-listing">Rent</Link></Fragment>),
@@ -18,11 +18,7 @@ const Navigation = props => {
 		rentListing: (<Fragment><Link to="/listing">Back</Link></Fragment>),
 		myBookings: (<Fragment><Link to="/profile">Back</Link></Fragment>)
 	}
-	return (
-		<nav>
-			{currentNav[props.currentNav]}
-		</nav>
-	);
+	return (<nav id="nav" style={currentNav[props.currentNav] ? null : {"display":"none"}}>{currentNav[props.currentNav] ? currentNav[props.currentNav]: "empty"}</nav>);
 }
 
 const mapStateToProps = (state) => ({

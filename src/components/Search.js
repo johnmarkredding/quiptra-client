@@ -1,25 +1,34 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { getListings } from '../store/thunks/listingsThunk';
 
-class Search extends Component {
+const Search = props => {
 
-	componentDidMount() {
-		this.props.getListings(this.props.city, this.props.state, this.props.term);
+	const [state, setState] = useState("state");
+	const [city, setCity] = useState("");
+	const [term, setTerm] = useState("");
+
+
+	useEffect(() => {
+		submitSearch();
+	}, []);
+
+	const submitSearch = (e) => {
+		if (!!e) {
+			e.preventDefault();
+		}
+		props.getListings(city, state, term);
+		setState("state");
+		setCity("");
+		setTerm("");
 	}
-
-	submitSearch = (e) => {
-		e.preventDefault();
-		this.props.getListings(this.props.city, this.props.state, this.props.term)
-	}
-
-	render() {
-		const {city, state, term} = this.props;
-		return (
-			<form onSubmit={this.submitSearch}>
-				<input onChange={e => this.props.setCity(e.target.value)} type="text" name="city" value={city} placeholder="City"/>
-				<select name="state" onChange={e => this.props.setState(e.target.value)} value={state}>
-					<option value=""> </option>
+	return (
+		<form id="search" onSubmit={submitSearch}>
+			<div className="input-group">
+				
+				<input className="city-input" onChange={e => setCity(e.target.value)} type="text" name="city" value={city} placeholder="City"/>
+				<select className="state-input" style={state === "state" ? {"color":"rgba(175,168,171,1)"} : null} name="state" onChange={e => setState(e.target.value)} value={state}>
+					<option value="state">State</option>
 					<option value="AL">AL</option>
 					<option value="AK">AK</option>
 					<option value="AR">AR</option>	
@@ -72,11 +81,11 @@ class Search extends Component {
 					<option value="WV">WV</option>
 					<option value="WY">WY</option>
 				</select>
-				<input onChange={e => this.props.setTerm(e.target.value)} type="text" name="term" value={term} placeholder="What do you need?"/>
-				<button>Submit</button>
-			</form>
-		);
-	}
+				<input className="term-input" onChange={e => setTerm(e.target.value)} type="text" name="term" value={term} placeholder="What are you looking for?"/>
+			</div>
+			<button>Submit</button>
+		</form>
+	);
 }
 
 const mapStateToProps = (state) => ({

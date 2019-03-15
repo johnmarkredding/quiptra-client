@@ -14,7 +14,7 @@ const ListingCard = props => {
 		<li className="listing-card" onClick={clickHandler}>
 			<img alt={listing.title} src={listing.image_url} />
 			<h3>{listing.title}</h3>
-			<p>{listing.body}</p>
+			<h4>${listing.price}/day</h4>
 			<p>{listing.city}, {listing.state}</p>
 		</li>
 	);

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Listings from '../components/Listings';
@@ -13,10 +13,10 @@ const Home = props => {
 			return <Redirect to="/welcome" />;
 		} else {
 			return (
-				<Fragment>
-					<h1>Home</h1>
+				<section>
+					<h1>Find Equipment</h1>
 					<Listings/>
-				</Fragment>
+				</section>
 			);
 		}
 	}

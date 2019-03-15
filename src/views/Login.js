@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import LoginForm from '../components/LoginForm';
 import { withRouter } from 'react-router-dom';
@@ -27,16 +27,16 @@ const Login = props => {
 			alert(data.message);
 		} else {
 			localStorage.setItem("token", data.token);
-			props.setCurrentUser(data.user);
+			localStorage.setItem("user", JSON.stringify(data.user));
 			props.history.push("/");
 		}
 	}
 
 	return (
-		<Fragment>
+		<section id="login">
 			<h1>Login</h1>
 			<LoginForm handleSubmit={handleSubmit}/>
-		</Fragment>
+		</section>
 	);
 }
 

@@ -1,5 +1,5 @@
 export const getListings = (searchCity, searchState, searchTerm) => (dispatch) => {
-	fetch(`http://localhost:3000/api/v1/listings/?city=${searchCity}&state=${searchState}&term=${searchTerm}`, {
+	fetch(`http://localhost:3000/api/v1/listings/?city=${searchCity}&state=${(searchState === "state" ? "": searchState)}&term=${searchTerm}`, {
 		method: "GET",
 		headers: {
 			"Authorization": `Bearer ${localStorage.getItem('token')}`,
@@ -55,7 +55,12 @@ export const getUser = () => (dispatch) => {
 			"Authorization": `Bearer ${localStorage.getItem('token')}`,
 			"Content-Type": "application/json"
 		}
-	}).then(r => r.json()).then(j => dispatch({type:"SET_CURRENT_USER", payload: j}));
+	})
+		.then(r => r.json())
+		.then(j => {
+			localStorage.setItem("user", j);
+			dispatch({type:"SET_CURRENT_USER", payload: j});
+		});
 }
 
 export const sendBookingRequest = (request) => (dispatch) => {

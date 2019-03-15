@@ -5,7 +5,7 @@ const initialState = {
 	rentalRequests: [],
 	searchTerm: "",
 	searchCity: "",
-	searchState: "",
+	searchState: "state",
 	currentUser: null,
 	currentListing: {},
 	bookedDates: [],
@@ -15,6 +15,8 @@ const initialState = {
 
 export const rootReducer = (state = initialState, action) => {
 	switch(action.type) {
+		case "CLEAR_STATE":
+			return initialState
 		case "SET_CURRENT_NAV":
 			return {...state, currentNav: action.payload}
 		case "SET_CURRENT_USER":

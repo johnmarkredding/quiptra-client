@@ -4,15 +4,15 @@ import { connect } from 'react-redux';
 
 const Home = props => {
 	useEffect(() => {
-		props.setCurrentUser(null);
 		localStorage.clear();
+		props.clearState();
 	});
 
 	return (<Redirect to="/welcome" />);
 }
 
 const mapDispatchToProps = (dispatch) => ({
-	setCurrentUser: (user) => dispatch({type: "SET_CURRENT_NAV", payload: user})
+	clearState: () => dispatch({type: "CLEAR_STATE", payload: null})
 });
 
 export default withRouter(connect(null, mapDispatchToProps)(Home));

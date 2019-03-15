@@ -5,24 +5,24 @@ import { getUser } from '../store/thunks/listingsThunk';
 
 const Profile = props => {
 	useEffect(()=> {
-		props.getUser();
 		props.setCurrentNav("profile");
 	}, [props.currentNav]);
+	const user = JSON.parse(localStorage.getItem("user"));
 
 	return (
-		<Fragment>
+		<section>
 			<h1>Profile</h1>
-			{!!props.currentUser ? (<p>{props.currentUser.id} : {props.currentUser.name}</p>) : null}
-			{!!props.currentUser ? (<p>@{props.currentUser.username}</p>) : null}
-			<Link to="/my-listings">My Listings</Link>
-			<Link to="/my-bookings">My Bookings</Link>
-			<Link to="/rental-requests">Rental Requests</Link>
-		</Fragment>
+			{!!user ? (<Fragment><h2>{user.name}</h2><h3>@{user.username}</h3><h3>{user.bio}</h3></Fragment>) : null}
+			<nav className="round-button-nav">
+				<Link className="round-button-vin-rouge" to="/my-listings">My Listings</Link>
+				<Link className="round-button-vin-rouge" to="/my-bookings">My Bookings</Link>
+				<Link className="round-button-vin-rouge" to="/rental-requests">Rental Requests</Link>
+			</nav>
+		</section>
 	);
 }
 const mapStateToProps = (state) => ({
 	currentNav: state.currentNav,
-	currentUser: state.currentUser
 });
 const mapDispatchToProps = (dispatch) => ({
 	getUser: () => dispatch(getUser()),
