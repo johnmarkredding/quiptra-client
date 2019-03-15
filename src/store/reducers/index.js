@@ -44,6 +44,17 @@ export const rootReducer = (state = initialState, action) => {
 			} else {
 				return {...state, myListings: [...state.myListings, action.payload]};
 			}
+		case "UPDATE_IN_MY_LISTINGS":
+			if (action.payload.message) {
+				alert(action.payload.message);
+				return state;
+			} else {
+				let newListings = [...state.myListings];
+				let listingToUpdate = newListings.find(l => l.id === action.payload.id);
+				newListings.splice(newListings.indexOf(listingToUpdate), 1, action.payload);
+
+				return {...state, myListings: newListings};
+			}
 		case "SET_MY_BOOKINGS":
 			if (action.payload.message) {
 				alert(action.payload.message);

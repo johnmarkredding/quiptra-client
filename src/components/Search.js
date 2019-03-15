@@ -8,7 +8,6 @@ const Search = props => {
 	const [city, setCity] = useState("");
 	const [term, setTerm] = useState("");
 
-
 	useEffect(() => {
 		submitSearch();
 	}, []);
@@ -25,7 +24,6 @@ const Search = props => {
 	return (
 		<form id="search" onSubmit={submitSearch}>
 			<div className="input-group">
-				
 				<input className="city-input" onChange={e => setCity(e.target.value)} type="text" name="city" value={city} placeholder="City"/>
 				<select className="state-input" style={state === "state" ? {"color":"rgba(175,168,171,1)"} : null} name="state" onChange={e => setState(e.target.value)} value={state}>
 					<option value="state">State</option>

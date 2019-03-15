@@ -407,6 +407,10 @@ li.listing-card:hover {
 	max-width: 22.737rem;
 }
 
+
+
+
+
 .DateRangePicker {
 	width: 100% !important;
 	max-height: 100%;
@@ -443,6 +447,33 @@ li.listing-card:hover {
 	height: 35px;
 	font-size:0px !important;
 }
+
+
+
+
+
+
+ul {
+	padding: 1rem;
+}
+
+
+.my-bookings > li {
+	transition-duration: .156s;
+	display: block;
+	margin-bottom: 1rem;
+	padding: 1rem 0 0.64rem;
+	border-radius: 0.41rem;
+}
+.my-bookings > li:hover {
+	box-shadow: 0 3px 10px rgb(202,206,218);
+	transform: translate(0, -3px);
+}
+.my-bookings > li > p:first-of-type {
+	font-weight: 700;
+}
+
+
 
 
 

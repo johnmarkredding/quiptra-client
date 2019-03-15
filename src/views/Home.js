@@ -5,7 +5,7 @@ import Listings from '../components/Listings';
 
 const Home = props => {
 	useEffect(()=> {
-		props.setCurrentNav("home")
+		props.setCurrentNav("home");
 	}, [props.currentNav]);
 
 	const ensureLoggedIn = () => {

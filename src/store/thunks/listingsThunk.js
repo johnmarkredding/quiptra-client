@@ -85,6 +85,17 @@ export const createListing = (listing) => (dispatch) => {
 	}).then(r => r.json()).then(j => dispatch({type:"ADD_TO_MY_LISTINGS", payload: j}));
 }
 
+export const updateListing = (listing) => (dispatch) => {
+	fetch(`http://localhost:3000/api/v1/listings/${listing.id}`, {
+		method: "PATCH",
+		headers: {
+			"Authorization": `Bearer ${localStorage.getItem('token')}`,
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(listing)
+	}).then(r => r.json()).then(j => dispatch({type:"UPDATE_IN_MY_LISTINGS", payload: j}));
+}
+
 export const updateRequest = (request) => (dispatch) => {
 	fetch(`http://localhost:3000/api/v1/bookings/${request.id}`, {
 		method: "PATCH",

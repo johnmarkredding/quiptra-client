@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import ListingCard from './ListingCard';
 import Search from './Search';
+
 
 const Listings = props => {
 	const listingItems = () => {
@@ -20,8 +21,7 @@ const Listings = props => {
 	);
 }
 
-
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
 	listings: state.listings
 });
 
